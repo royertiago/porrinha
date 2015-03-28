@@ -1,4 +1,5 @@
 *.o
 *.dep.mk
 .*.swp
+main
 player_list/generate_player_list.cpp
