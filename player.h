@@ -68,6 +68,14 @@ struct Player {
     static constexpr int INVALID = -3;
 };
 
-typedef Player * ( *PlayerFactory )( int player_num, int starting_chopsticks );
+/* These functions are used by the game's core
+ * to generate all the players for a given game.
+ * Note that a single factory function might be called several times.
+ *
+ * Parameters:
+ *  player_count is the number of players in the game.
+ *  starting_chopsticks is the number of chopsticks each player starts with.
+ */
+typedef Player * ( *PlayerFactory )( int player_count, int starting_chopsticks );
 
 #endif // PLAYER_H
