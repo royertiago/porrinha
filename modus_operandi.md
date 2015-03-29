@@ -48,6 +48,10 @@ or throws exceptions
 (in any method call)
 might be removed from the game.
 
+(There is no excuse for doing this;
+use the utility functions in `core/util.h`
+if you are lazy.)
+
 Guessing
 --------
 
@@ -124,6 +128,19 @@ if your artificial intelligence uses std::cout.
 There is a guarantee: all output concerning the current round
 is displayed before starting the next round.
 
+`core/util.h`
+=============
+
+The functions defined in this file allows programmers to query
+the current game state about several aspects,
+regarding both overall game state
+(like the total number of chopsticks)
+and specific information about players
+(like the number of chopsticks a player have).
+
+Use the functions of this file to avoid being
+"outside the rules".
+
 Error reporting
 ===============
 
@@ -136,6 +153,9 @@ The game's core know how to handle some of this situations
 in order to keep running,
 even in the presence of bad programmers
 (or buggy code).
+
+You may use the functions in `core/util.h`
+to avoid being outside the game rules.
 
 There is some error reporting built in core's algorithms;
 note that these reports might interleave with the program's normal output.
