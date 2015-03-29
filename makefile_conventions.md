@@ -14,6 +14,13 @@ Every submakefile shall be named `makefile.mk`.
 Submakefiles
 ============
 
+Each submakefile will "dominate" its directory:
+the main makefile will not interfere with the building process
+that happens inside the directories that contains a `makefile.mk`.
+
+The `makefile.mk` is allowed to define build rules and targets
+for any file inside its directory and any subdirectories.
+
 Mimicking C's convention,
 any included makefile may define any additional variable
 and any additional target it wants,
