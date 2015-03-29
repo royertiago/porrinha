@@ -17,7 +17,7 @@ The guesses are said out loud in clockwise direction;
 no two players can guess the same value.
 
 When all players had made their guesses,
-everyone open its hands and the real number of chosen chopsticks.
+everyone open its hands and reveal the number of chosen chopsticks.
 If some player made the right guess,
 this player loses one of its chopsticks,
 and become the first guesser of the next round.
