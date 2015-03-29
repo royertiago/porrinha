@@ -13,6 +13,8 @@ struct Player {
         const std::vector<int>& hands,
         const std::vector<int>& guesses
     ) = 0;
+
+    virtual ~Player() = default;
 };
 
 typedef Player * ( *PlayerFactory )( int player_num, int starting_chopsticks );
