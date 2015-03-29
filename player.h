@@ -37,12 +37,14 @@ struct Player {
      *
      * If other_guesses[i] >= 0, then other_guesses[i]
      * is guaranteed to be, at most, the total number of choptsicks in the table.
-     * It can have three negative values:
-     *  -1: the player still did not made its guess.
-     *  -2: the player is not playing anymore.
-     *  -3: the player made an invalid guess.
+     * Negative values codify status of the guess.
+     * They can be
+     *  Player::PENDING: the player still did not made its guess.
+     *  Player::NOT_PLAYING: the player is not playing anymore.
+     *  Player::INVALID: the player made an invalid guess.
+     * These values are avaliable as constants of this class.
      *
-     * Note that the guess of this player is, still, -1
+     * Note that the guess of this player is, still, Player::PENDING
      * (since its guess was not recorded).
      */
     virtual int guess( const std::vector<int>& other_guesses ) = 0;
@@ -59,6 +61,11 @@ struct Player {
     ) = 0;
 
     virtual ~Player() = default;
+
+    /* "Guess" values that are not real guesses. */
+    static constexpr int PENDING = -1;
+    static constexpr int NOT_PLAYING = -2;
+    static constexpr int INVALID = -3;
 };
 
 typedef Player * ( *PlayerFactory )( int player_num, int starting_chopsticks );
