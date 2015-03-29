@@ -15,7 +15,10 @@ These two files inform the game's core
 about a PlayerFactory function.
 PlayerFactory is defined in [`player.h`](player.h).
 
-`ai.h` declares the factory function.
+`ai.h`
+------
+
+Declares the factory function.
 For instance, it might be
 
     namespace my_intelligence {
@@ -28,7 +31,10 @@ to avoid name conflicts and linking errors.)
 There should be only the facory declaration,
 not its implementation.
 
-`ai.conf` contains the player's name in quotes
+`ai.conf`
+---------
+
+Contains the player's name in quotes
 (the name that will identify that player in the command-line options)
 and a reference to it's factory function,
 surrounded by braces:
@@ -39,6 +45,9 @@ Note the trailing comma.
 
 That's actually a valid constructor call for
 `std::pair< const char *, PlayerFactory >`.
+
+Code generation
+---------------
 
 The makefile generates C++ code based on the assumption
 that the artificial intelligences follows this format.
@@ -53,7 +62,18 @@ Remember, however, to include the trailing comma.
 
 (Each of these braced pairs are actually used to construct a `std::vector`
 using an `initializer_list`;
-that's why the trailing comma is important.)
+that's why the comma is important.)
+
+Compiler path
+-------------
+
+To avoid code duplication,
+the compiler compiles the sources from the root directory
+with the flag `-I./`;
+this allows source files
+to `#include` to any file in the source tree
+by its name relative to the root directory
+--- regardless of where that source file is located.
 
 Each directory contains several `.cpp` files
 and might have a custom makefile.mk.

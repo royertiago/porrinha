@@ -10,6 +10,18 @@ See the [game rules](game_rules.md) for more information.
 The code is licensed under GPL version 3 or any later version.
 
 
+Compiling
+=========
+
+To compile the game sources,
+you need a `gcc`-compatible compiler
+that supports C++14.
+(The makefile uses the `CXX`, that can be set by the user
+to an appropriate compiler.)
+
+The game was tested with `gcc 4.9.1` and `clang 3.5.0`.
+
+
 Implementing additional artificial intelligences
 =================================================
 
