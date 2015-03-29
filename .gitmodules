@@ -4,3 +4,6 @@
 [submodule "porrinha-human"]
 	path = porrinha-human
 	url = https://github.com/royertiago/porrinha-human
+[submodule "porrinha-random"]
+	path = porrinha-random
+	url = https://github.com/royertiago/porrinha-random

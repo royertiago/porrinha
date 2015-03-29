@@ -29,6 +29,14 @@ The code of this repository is organized so that it is possible to have
 several artificial intelligences battling simultaneously
 in the same game.
 
+See the [tutorial](tutorial.md) to creating your own artificial intelligence.
+The remainder of this section deals with
+the full specification that needs to be taken into account
+when creating an artificial intelligence.
+You only need to read further
+if your AI does function calls at unusual moments
+or needs custom build rules.
+
 There is a [common interface](player.h) that must be implemented
 by all artificial intelligences.
 How this interface is used by the game is documented in the
