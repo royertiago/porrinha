@@ -2,7 +2,8 @@
 # that include several files.
 #
 # However, some strictness must be followed in the code;
-# see "naming_conventions.md" for more information.
+# see "makefile_conventions.md" for more information.
+
 CXXFLAGS := -std=c++1y -g $(ILIBS) -I./
 
 # Directories whose makefiles need to be included
@@ -22,7 +23,6 @@ MAIN := $(shell find . $(FINDIGNORE) -name "*.cpp" -exec grep -l "^int main" {} 
 NOMAIN := $(shell find . $(FINDIGNORE) -name "*.cpp" -exec grep -L "^int main" {} +)
 
 
-# Intermediary file includion - see submakefiles.md for details.
 include $(INCLUDE)
 
 
