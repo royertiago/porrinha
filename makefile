@@ -37,7 +37,6 @@ NOMAINOBJ := $(NOMAIN:.cpp=.o)
 PROGRAMS := $(MAIN:.cpp=)
 
 
-$(warning $(DEP))
 -include $(DEP)
 
 
