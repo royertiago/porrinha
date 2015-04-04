@@ -43,7 +43,7 @@ struct Player {
      * This method is called exactly once per round,
      * after every guess had been computed.
      *
-     * Note there is no notification to this player * that the game ended;
+     * Note there is no notification to this player that the game ended;
      * this information can be deduced inspecting core::active_player_count().
      */
     virtual void settle_round() = 0;
