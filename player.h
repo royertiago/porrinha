@@ -6,6 +6,11 @@
  * The semantis of each method (and their call order)
  * is better documented in modus_operandi.md;
  * this is a resumed version.
+ *
+ * This interface contains only the minimum amount of information
+ * to a player make its move.
+ * Any non-trivial artificial intelligence will have to request
+ * information from the game, avaliable in core/util.h.
  */
 
 #include <string>
@@ -20,7 +25,7 @@ struct Player {
      */
     virtual std::string name() const = 0;
 
-    /* Number of chopsticks that this player will held
+    /* Ask this player the number of chopsticks that it will held
      * in the table this round.
      *
      * If it's an invalid number (smaller than zero
@@ -31,22 +36,17 @@ struct Player {
 
     /* The guess to about the total number of chopsticks
      * held in the table in this round.
-     *
-     * The values of other_guesses follows the same conventions
-     * as core::guess(), in the file core/util.h.
      */
-    virtual int guess( const std::vector<int>& other_guesses ) = 0;
+    virtual int guess() = 0;
 
     /* Inform this player that the round ended.
-     * hands[i] is what the i-th player's method hand() returned;
-     * guesses[i] is wath the i-th player's method guess() returned.
+     * This method is called exactly once per round,
+     * after every guess had been computed.
      *
-     * Negative guesses have the same meaning as in Player::guess().
+     * Note there is no notification to this player * that the game ended;
+     * this information can be deduced inspecting core::active_player_count().
      */
-    virtual void settle_round(
-        const std::vector<int>& hands,
-        const std::vector<int>& guesses
-    ) = 0;
+    virtual void settle_round() = 0;
 
     virtual ~Player() = default;
 };
