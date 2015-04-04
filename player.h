@@ -32,20 +32,8 @@ struct Player {
     /* The guess to about the total number of chopsticks
      * held in the table in this round.
      *
-     * The vector other_guesses contains all the guesses
-     * that the other players made.
-     *
-     * If other_guesses[i] >= 0, then other_guesses[i]
-     * is guaranteed to be, at most, the total number of choptsicks in the table.
-     * Negative values codify status of the guess.
-     * They can be
-     *  Player::PENDING: the player still did not made its guess.
-     *  Player::NOT_PLAYING: the player is not playing anymore.
-     *  Player::INVALID: the player made an invalid guess.
-     * These values are avaliable as constants of this class.
-     *
-     * Note that the guess of this player is, still, Player::PENDING
-     * (since its guess was not recorded).
+     * The values of other_guesses follows the same conventions
+     * as core::guess(), in the file core/util.h.
      */
     virtual int guess( const std::vector<int>& other_guesses ) = 0;
 
@@ -61,11 +49,6 @@ struct Player {
     ) = 0;
 
     virtual ~Player() = default;
-
-    /* "Guess" values that are not real guesses. */
-    static constexpr int PENDING = -1;
-    static constexpr int NOT_PLAYING = -2;
-    static constexpr int INVALID = -3;
 };
 
 /* These functions are used by the game's core
