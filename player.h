@@ -55,10 +55,20 @@ struct Player {
  * to generate all the players for a given game.
  * Note that a single factory function might be called several times.
  *
- * Parameters:
- *  player_count is the number of players in the game.
- *  starting_chopsticks is the number of chopsticks each player starts with.
+ * The argc/argv parameters function exactly like the argc and argv
+ * of the main function, except argv[argc] might have its value changed
+ * after the function is called.
+ *
+ * In particular, all the following is granted to be true:
+ * - argv[0] is the string wherewith this player was chosen.
+ * - argv[argc] is guaranteed to be a null pointer.
+ * - The called function are allowed to modify both argv
+ *   and the strings it points to
+ *   (always taking care to not overrun buffers).
+ * - The called function shall not write to any value
+ *   outside argv[0], ..., argv[argc],
+ *   nor delete argv or any string it points.
  */
-typedef Player * ( *PlayerFactory )( int player_count, int starting_chopsticks );
+typedef Player * ( *PlayerFactory )( int argc, char * argv[] );
 
 #endif // PLAYER_H
