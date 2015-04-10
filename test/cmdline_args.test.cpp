@@ -44,3 +44,35 @@ TEST_CASE( "Basic cmdline::args test", "[cmdline][trivial]" ) {
     args.shift();
     CHECK( args.size() == 0 );
 }
+
+TEST_CASE( "Building cmdline::args via push_back", "[cmdline][push_back]" ) {
+    cmdline::args args;
+    CHECK( args.size() == 0 );
+    CHECK( args.program_name() == "" );
+    args.program_name( "custom" );
+    CHECK( args.program_name() == "custom" );
+
+    args.push_back( "--value" );
+    CHECK( args.size() == 1 );
+    args.push_back( "78" );
+    CHECK( args.size() == 2 );
+    args.push_back( "file.cpp" );
+    CHECK( args.size() == 3 );
+
+    CHECK( args.peek() == "--value" );
+    CHECK( args.next() == "--value" );
+    CHECK( args.size() == 2 );
+    CHECK( args.peek() == "78" );
+    CHECK( args.next() == "78" );
+    CHECK( args.size() == 1 );
+    CHECK( args.peek() == "file.cpp" );
+    CHECK( args.next() == "file.cpp" );
+    CHECK( args.size() == 0 );
+    CHECK( args.program_name() == "custom" );
+
+    args.push_back( "another.cpp" );
+    CHECK( args.size() == 1 );
+    CHECK( args.peek() == "another.cpp" );
+    CHECK( args.next() == "another.cpp" );
+    CHECK( args.size() == 0 );
+}
