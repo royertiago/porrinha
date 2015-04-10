@@ -7,3 +7,6 @@
 [submodule "porrinha-random"]
 	path = porrinha-random
 	url = https://github.com/royertiago/porrinha-random
+[submodule "Catch"]
+	path = Catch
+	url = https://github.com/philsquared/Catch
