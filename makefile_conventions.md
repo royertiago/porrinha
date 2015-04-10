@@ -273,7 +273,8 @@ by specifying which program you want to relink,
 using, for instance, `make p`.
 
 (This is admittedly suboptimal; the automatic dependency management
-merely reduces the recompilation time, but not the relinking time.)
+merely reduces the recompilation time, but not the relinking time.
+See [`relinking_problem.md`](relinking_problem.md) for details.)
 
 The second consequence is that we can add arbitrary object files
 as dependencies of `p`,

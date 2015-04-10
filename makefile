@@ -65,17 +65,7 @@ include $(submakefiles)
 all: $(prog)
 
 # Suboptimal dependency management.
-# I have made every program depend on every non-main object file;
-# this way I can guarantee that the object file will be remade
-# whenever any module used by an artifficial inteligence is updated.
-#
-# Resolving this without such intrusion would need to somehow
-# inspect the object files and tell make which symbols are defined
-# in each object. This inspection could be done by using by somehow parsing
-# 'nm -u' (to get the dependecies) and 'nm | grep " *[TtRr]"' (to get the
-# provided symbols), but I have no idea of how to dynamically update
-# the make's DAG without invoking make repeatedly
-# --- which should be make's work.
+# See relinking_problem.md for details.
 $(prog): %: %.o $(obj)
 	$(link_main)
 
