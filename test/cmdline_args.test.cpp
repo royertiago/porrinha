@@ -16,6 +16,9 @@ TEST_CASE( "Basic cmdline::args test", "[cmdline][trivial]" ) {
     cmdline::args args( 7, argv );
 
     CHECK( args.size() == 6 );
+    CHECK( args.program_name() == "test" );
+    args.program_name( "main" );
+    CHECK( args.program_name() == "main" );
 
     CHECK( args.peek() == "--home" );
     CHECK( args.next() == "--home" );
