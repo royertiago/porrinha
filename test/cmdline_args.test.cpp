@@ -76,3 +76,39 @@ TEST_CASE( "Building cmdline::args via push_back", "[cmdline][push_back]" ) {
     CHECK( args.next() == "another.cpp" );
     CHECK( args.size() == 0 );
 }
+
+TEST_CASE( "Subarguments", "[cmdline]" ) {
+    const char * argv[] = {
+        "test",
+        "cmd",
+        "one",
+        "two",
+        "another_cmd",
+        "three",
+        "four",
+        "six",
+        "extra_arg",
+    };
+    cmdline::args args( 9, argv );
+    CHECK( args.size() == 8 );
+
+    CHECK( args.peek() == "cmd" );
+    cmdline::args cmd1 = args.subcmd( 2 );
+    CHECK( args.peek() == "another_cmd" );
+    CHECK( cmd1.size() == 2 );
+    CHECK( args.size() == 5 );
+    CHECK( cmd1.program_name() == "cmd" );
+    CHECK( cmd1.next() == "one" );
+    CHECK( cmd1.next() == "two" );
+    CHECK( cmd1.size() == 0 );
+
+    CHECK( args.next() == "another_cmd" );
+    cmdline::args cmd2 = args.subarg( 3 );
+    CHECK( cmd2.size() == 3 );
+    CHECK( cmd2.next() == "three" );
+    CHECK( cmd2.next() == "four" );
+    CHECK( cmd2.next() == "six" );
+
+    CHECK( args.next() == "extra_arg" );
+    CHECK( args.size() == 0 );
+}
