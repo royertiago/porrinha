@@ -1,23 +1,24 @@
 # Get the directory we currently are; it includes a trailing slash
-PLAYERLIST_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
+playerlist_dir := $(dir $(lastword $(MAKEFILE_LIST)))
 
 # The target built by this makefile
-PLAYERLIST := $(PLAYERLIST_DIR)generate_player_list.cpp
-PLAYERLIST_OBJ := $(PLAYERLIST:.cpp=.o)
+playerlist := $(playerlist_dir)generate_player_list.cpp
 
 # Add the only file of this directory
-NOMAIN += $(PLAYERLIST)
+src += $(playerlist)
+dep += $(playerlist:.cpp=.dep.mk)
+obj += $(playerlist:.cpp=.o)
 
 # This works because we run from the root directory.
-PLAYERLIST_DEP := $(shell find -name "ai.conf" -o -name "ai.h")
+playerlist_dep := $(shell find -name "ai.conf" -o -name "ai.h")
 
-$(PLAYERLIST) : $(PLAYERLIST_DEP)
-	$(PLAYERLIST_DIR)generate_player_list.sh > $(PLAYERLIST) 
+$(playerlist) : $(playerlist_dep)
+	$(playerlist_dir)generate_player_list.sh > $(playerlist)
 
 mostlyclean: playerlist-mostlyclean
 playerlist-mostlyclean:
-	rm -f $(PLAYERLIST_OBJ)
+	rm -f $(playerlist:.cpp=.o)
 
 clean: playerlist-clean
 playerlist-clean:
-	rm -f $(PLAYERLIST)
+	rm -f $(playerlist)
