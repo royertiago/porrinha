@@ -41,7 +41,7 @@ prog := $(prog:.cpp=)
 src := $(shell find . $(findignore) -name "*.cpp" -print)
 
 # .dep.mk files that should be automatically generated from .cpp files.
-dep := $(MAIN:.cpp=.dep.mk) $(NOMAIN:.cpp=.dep.mk)
+dep := $(src:.cpp=.dep.mk)
 
 # Object files that contains definitions needed by other programs
 obj := $(shell find . $(findignore) -name "*.cpp" -exec grep -L "^int main" {} +)
