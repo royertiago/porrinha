@@ -26,6 +26,14 @@ struct Player {
      */
     virtual std::string name() const = 0;
 
+    /* Tell this player that a new game will start.
+     *
+     * This method is called exactly once at beginning of each game.
+     * All the core:: functions in the section "Overall game queries"
+     * shall be valid and correct when this method is called.
+     */
+    virtual void begin_game() = 0;
+
     /* Ask this player the number of chopsticks that it will held
      * in the table this round.
      *
@@ -44,10 +52,18 @@ struct Player {
      * This method is called exactly once per round,
      * after every guess had been computed.
      *
-     * Note there is no notification to this player that the game ended;
-     * this information can be deduced inspecting core::active_player_count().
+     * Note that there is no corresponding 'begin_round' method;
+     * when the round "officially" starts, the method 'hand' will be called,
+     * so round begin can be easily deduced using this information.
      */
-    virtual void settle_round() = 0;
+    virtual void end_round() = 0;
+
+    /* Tell this player the game ended.
+     *
+     * The "Overall game queries" will still be valid when this method is called,
+     * to allow for players to record statistics for future games.
+     */
+    virtual void end_game() = 0;
 
     virtual ~Player() = default;
 };
