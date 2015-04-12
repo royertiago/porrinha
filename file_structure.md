@@ -28,7 +28,7 @@ For instance, it might be
 (We strongly reccomend each AI to have its own namespace
 to avoid name conflicts and linking errors.)
 
-There should be only the facory declaration,
+There should be only the factory declaration,
 not its implementation.
 
 `ai.conf`

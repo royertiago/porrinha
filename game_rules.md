@@ -1,7 +1,7 @@
 Game Rules
 ==========
 
-From [wikipedia](http://pt.wikipedia.org/wiki/Porrinha)
+From [Wikipedia](http://pt.wikipedia.org/wiki/Porrinha)
 
 The game is played with at least two players.
 Each player receive three chopsticks at the beginning of the game.
