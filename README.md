@@ -30,6 +30,9 @@ several artificial intelligences battling simultaneously
 in the same game.
 
 See the [tutorial](tutorial.md) to creating your own artificial intelligence.
+You should also read the documentation in the files
+[`player.h`](player.h) and [`game/core.h`](game/core.h).
+
 The remainder of this section deals with
 the full specification that needs to be taken into account
 when creating an artificial intelligence.

@@ -22,7 +22,7 @@ Declares the factory function.
 For instance, it might be
 
     namespace my_intelligence {
-        Player * generate( int, int );
+        Player * generate( cmdline::args&& );
     }
 
 (We strongly reccomend each AI to have its own namespace
@@ -69,7 +69,7 @@ Compiler path
 
 To avoid code duplication,
 the compiler compiles the sources from the root directory
-with the flag `-I./`;
+with the flag `-iquote./`;
 this allows source files
 to `#include` to any file in the source tree
 by its name relative to the root directory

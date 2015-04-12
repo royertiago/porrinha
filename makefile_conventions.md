@@ -166,6 +166,9 @@ With the above rules, you should be able to adapt any existing makefile
 to conform this repository's assumptions.
 The main makefile will _not_ touch any file inside your makefile's directory.
 
+(The four special makefile variables discussed below
+also does not include files from directories that have makefiles.)
+
 Two tasks, however, should be common to the submakefiles:
 compiling `.cpp` files to object files,
 and automatic dependency generation.
@@ -280,5 +283,12 @@ The second consequence is that we can add arbitrary object files
 as dependencies of `p`,
 without exposing them to the external world through `obj`,
 and have the top makefile correctly link them together.
+`test/makefile.mk` does this.
+That makefile handles a list of unit tests contained in object files
+that must be linked to a specific object file that contains a special `main` function.
+The object files in that subdirectory are not added to `obj`,
+only to `src` and `dep`.
+Then, we makes the program `test/test` depend on this object files
+so that they are correctly linked.
 
 [`player_list/makefile.mk`]: player_list/makefile.mk
