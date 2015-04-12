@@ -112,3 +112,63 @@ TEST_CASE( "Subarguments", "[cmdline]" ) {
     CHECK( args.next() == "extra_arg" );
     CHECK( args.size() == 0 );
 }
+
+TEST_CASE( "Subarguments with predicates", "[cmdline][predicate]" ) {
+    const char * argv[] = {
+        "test",
+        "[cmd]",
+        "one",
+        "two",
+        "[cmd2]",
+        "three",
+        "four",
+        "[cmd3]",
+    };
+
+    bool (* pred )(const std::string&) = [](const std::string & str) {
+        if( str == "" ) return false;
+        return *str.begin() == '[' && *str.rbegin() == ']';
+    };
+
+    cmdline::args main_args( 8, argv );
+    cmdline::args args;
+    args = main_args.subarg_until( pred );
+
+    CHECK( args.size() == 0 );
+    CHECK( args.program_name() == "" );
+    CHECK( main_args.size() == 7 );
+    CHECK( main_args.next() == "[cmd]" );
+
+    args = main_args.subarg_until( pred );
+    CHECK( args.size() == 2 );
+    CHECK( args.program_name() == "" );
+    CHECK( args.next() == "one" );
+    CHECK( args.next() == "two" );
+    CHECK( main_args.size() == 4 );
+    CHECK( main_args.peek() == "[cmd2]" );
+
+    args = main_args.subcmd_until( pred );
+    CHECK( args.size() == 2 );
+    CHECK( args.program_name() == "[cmd2]" );
+    CHECK( args.next() == "three" );
+    CHECK( args.next() == "four" );
+    CHECK( main_args.size() == 1 );
+    CHECK( main_args.peek() == "[cmd3]" );
+
+    args.push_back( "A" );
+    CHECK( args.size() != 0 );
+    // Just to make sure we will erase 'args'.
+
+    SECTION( "subarg_until near end" ) {
+        main_args.shift();
+        REQUIRE_NOTHROW( args = main_args.subarg_until(pred) );
+        CHECK( args.size() == 0 );
+    }
+
+    SECTION( "subcmd_until near end" ) {
+        REQUIRE_NOTHROW( args = main_args.subcmd_until(pred) );
+        CHECK( args.size() == 0 );
+        CHECK( args.program_name() == "[cmd3]" );
+        CHECK( main_args.size() == 0 );
+    }
+}
