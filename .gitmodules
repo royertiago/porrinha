@@ -10,3 +10,6 @@
 [submodule "Catch"]
 	path = Catch
 	url = https://github.com/philsquared/Catch
+[submodule "porrinha-wagner"]
+	path = porrinha-wagner
+	url = https://royertiago@github.com/royertiago/porrinha-wagner
