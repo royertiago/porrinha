@@ -16,3 +16,6 @@
 [submodule "porrinha-royer"]
 	path = porrinha-royer
 	url = https://github.com/royertiago/porrinha-royer
+[submodule "porrinha-lucas"]
+	path = porrinha-lucas
+	url = https://royertiago@github.com/royertiago/porrinha-lucas
