@@ -20,7 +20,7 @@ endef
 #
 # However, some strictness must be followed in the code;
 # see "makefile_conventions.md" for more information.
-CXXFLAGS := -g
+CXXFLAGS ?= -g
 ALL_CXXFLAGS := $(CXXFLAGS) -std=c++1y -iquote./ -isystem Catch/single_include
 
 # Directories whose makefiles need to be included
