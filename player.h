@@ -15,7 +15,7 @@
 
 #include <string>
 #include <vector>
-#include "cmdline/args.h"
+#include "cmdline/args.hpp"
 
 struct Player {
     /* Name of this player.
